@@ -80,10 +80,10 @@ Birthday added.
 
 ## 🧠 Notes
 
-Each contact can have multiple phone numbers
-Phone numbers must be 10 digits
-Birthday format must be DD.MM.YYYY
-Upcoming birthdays are shown for the next 7 days
+- Each contact can have multiple phone numbers
+- Phone numbers must be 10 digits
+- Birthday format must be DD.MM.YYYY
+- Upcoming birthdays are shown for the next 7 days
 
 
 ---
