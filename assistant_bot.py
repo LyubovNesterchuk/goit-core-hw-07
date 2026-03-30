@@ -1,6 +1,8 @@
 from collections import UserDict
 from datetime import datetime, date, timedelta
 from color_function import success, error, info, greet
+
+
 class Field:
     def __init__(self, value):
         self.value = value
@@ -110,7 +112,7 @@ welcome_banner = '''
 commands = '''
 1) hello - greet the assistant bot
 2) add username phone - add a new contact with name and phone number
-3) change username phone - change the phone number for an existing contact
+3) change username old_phone new_phone- change the phone number for an existing contact
 4) phone username - show the phone number of the contact
 5) all - show all saved contacts
 6) help - show this help menu
@@ -249,7 +251,7 @@ def show_help():
 def main():
     book = AddressBook()
 
-    print(greet("Welcome to the assistant bot!"))
+    print(greet("Welcome to the assistant bot!\n"))
 
     while True:
         user_input = input(info("Enter a command: ").strip())
