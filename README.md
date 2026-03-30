@@ -35,7 +35,7 @@ A simple command-line assistant bot for managing contacts, phone numbers, and bi
 ---
 
 ## 📦 Project Structure
-assistant_bot/
+```assistant_bot/
 │
 ├── main.py # Entry point of the application
 ├── models.py # Data models (Contact, AddressBook, Fields)
@@ -45,7 +45,7 @@ assistant_bot/
 └── README.md
 
 
----
+```
 
 ## ▶️ How to Run
 
@@ -59,7 +59,7 @@ Run the program:
 python main.py
 
 
----
+```
 
 ## 📌 Example Usage
 
