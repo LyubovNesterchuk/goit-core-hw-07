@@ -1,6 +1,6 @@
 from collections import UserDict
 from datetime import datetime, date, timedelta
-
+from color_function import success, error, info, greet
 class Field:
     def __init__(self, value):
         self.value = value
@@ -120,8 +120,8 @@ commands = '''
 10) exit or close - exit the application
 ''' 
 def init():
-    print(welcome_banner)
-    print(commands)
+    print(greet(welcome_banner))
+    print(info(commands))
     print()
 
 def parse_input(user_input):
@@ -135,11 +135,11 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except ValueError: 
-            return "Give me name and phone please."
+            return error("Give me name and phone please.")
         except KeyError:
-            return "Contact not found."
+            return error("Contact not found.")
         except IndexError: 
-            return "Enter name."
+            return error("Enter name.")
     return inner
 
 
@@ -154,7 +154,7 @@ def add_contact(args, book: AddressBook):
         message = "Contact added."
     if phone:
         record.add_phone(phone)
-    return message
+    return success(message)
 
 
 @input_error
@@ -163,10 +163,10 @@ def change_contact(args, book: AddressBook):
 
     record = book.find(name)
     if not record:
-        return "Contact not found."
+        return error("Contact not found.")
 
     record.edit_phone(old_phone, new_phone)
-    return "Contact updated."    
+    return success("Contact updated."  )  
 
 
 @input_error
@@ -175,9 +175,9 @@ def show_phone(args, book: AddressBook):
     record = book.find(name)
 
     if not record:
-        return "Contact not found."
+        return error("Contact not found.")
 
-    return "; ".join(p.value for p in record.phones)
+    return success("; ".join(p.value for p in record.phones))
 
 @input_error
 def add_birthday(args, book: AddressBook):
@@ -185,10 +185,10 @@ def add_birthday(args, book: AddressBook):
     
     record = book.find(name)
     if not record:
-        return "Contact not found."
+        return error("Contact not found.")
     
     record.add_birthday(birthday)
-    return "Birthday added."
+    return success("Birthday added.")
 
 
 @input_error
@@ -197,12 +197,12 @@ def show_birthday(args, book: AddressBook):
     record = book.find(name)
 
     if not record:
-        return "Contact not found."
+        return error("Contact not found.")
 
     if not record.birthday:
-        return "Birthday not set."
+        return error("Birthday not set.")
 
-    return record.birthday.value.strftime("%d.%m.%Y")
+    return success(record.birthday.value.strftime("%d.%m.%Y"))
 
 
 @input_error
@@ -225,43 +225,43 @@ def birthdays(args, book):
         if 0 <= (bday - today).days <= 7:
             upcoming.append(f"{record.name.value}: {bday.strftime('%d.%m.%Y')}")
 
-    return "\n".join(upcoming) if upcoming else "No upcoming birthdays."
+    return success("\n".join(upcoming) if upcoming else "No upcoming birthdays.")
 
 
 @input_error
 def show_all(book: AddressBook):
     if not book.data:
-        return "No contacts saved."
+        return error("No contacts saved.")
     
-    return "\n".join(str(record) for record in book.data.values())
+    return success("\n".join(str(record) for record in book.data.values()))
 
 
 @input_error
 def say_hello():
-    return "How can I help you?"
+    return info("How can I help you?")
 
 
 @input_error
 def show_help():
-    return commands
+    return info(commands)
 
 
 def main():
     book = AddressBook()
 
-    print("Welcome to the assistant bot!")
+    print(greet("Welcome to the assistant bot!"))
 
     while True:
-        user_input = input("Enter a command: ").strip()
+        user_input = input(info("Enter a command: ").strip())
 
         if not user_input:
-            print("Invalid command.")
+            print(error("Invalid command."))
             continue
 
         command, args = parse_input(user_input)
 
         if command in ["close", "exit"]:
-            print("Good bye!")
+            print(greet("Good bye!"))
             break
 
         elif command == "hello":
@@ -300,3 +300,8 @@ if __name__ == "__main__":
     main()
 
 
+# в терміналі: 
+# python -m venv .venv
+# source .venv/Scripts/activate
+# pip install colorama 
+# pip freeze > requirements.txt
