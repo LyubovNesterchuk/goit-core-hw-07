@@ -17,9 +17,9 @@ commands = '''
 4) phone username - show the phone number of the contact
 5) all - show all saved contacts
 6) help - show this help menu
-7) add-birthday username DD.MM.YYYY
-8) show-birthday username
-9) birthdays
+7) add-birthday username DD.MM.YYYY - add a birthday for the specified contact
+8) show-birthday username - show the birthday of the specified contact
+9) birthdays - show birthdays for the next 7 days with the dates they should be congratulated
 10) exit or close - exit the application
 ''' 
 

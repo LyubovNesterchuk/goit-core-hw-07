@@ -34,6 +34,8 @@ def add_contact(args, book: AddressBook):
 
     return success(message)
 
+
+
 @input_error
 def change_contact(args, book: AddressBook):
     name, old_phone, new_phone = args
@@ -44,12 +46,14 @@ def change_contact(args, book: AddressBook):
     return success("Contact updated.")
 
 
+
 @input_error
 def show_phone(args, book: AddressBook):
     name = args[0]
 
     record = get_record_or_fail(book, name)
     return success("; ".join(p.value for p in record.phones))
+
 
 
 @input_error
@@ -62,6 +66,7 @@ def add_birthday(args, book: AddressBook):
     return success("Birthday added.")
 
 
+
 @input_error
 def show_birthday(args, book: AddressBook):
     name = args[0]
@@ -72,6 +77,7 @@ def show_birthday(args, book: AddressBook):
         return error("Birthday not set.")
 
     return success(record.birthday.value)
+
 
 
 @input_error
@@ -103,6 +109,7 @@ def birthdays(args, book: AddressBook):
     )
 
 
+
 @input_error
 def show_all(book: AddressBook):
     if not book.data:
@@ -111,9 +118,11 @@ def show_all(book: AddressBook):
     return success("\n".join(str(record) for record in book.data.values()))
 
 
+
 @input_error
 def say_hello():
     return info("How can I help you?")
+
 
 
 @input_error
