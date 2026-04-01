@@ -37,7 +37,7 @@ def main():
 
         elif command == "all":
             print(show_all(book))
-
+            
         elif command == "add-birthday":
             print(add_birthday(args, book))
 

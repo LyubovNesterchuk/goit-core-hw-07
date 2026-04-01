@@ -23,15 +23,15 @@ class Phone(Field):
             raise ValueError("Phone must be 10 digit")
         super().__init__(value)
 
-
+   
 class Birthday(Field):
     def __init__(self, value):
         try:
-            parsed_date = datetime.strptime(value, "%d.%m.%Y").date()
+            datetime.strptime(value, "%d.%m.%Y")
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
-        super().__init__(parsed_date)
-       
+        super().__init__(value)
+
 
 class Record:
     def __init__(self, name: str):
@@ -67,11 +67,11 @@ class Record:
     def add_birthday(self, birthday: str):
         self.birthday = Birthday(birthday)    
 
+
     def __str__(self):
-        phones = "; ".join(p.value for p in self.phones)
-        birthday = (self.birthday.value.strftime("%d.%m.%Y") if self.birthday else "Not available")
+        phones = "; ".join(p.value for p in self.phones) if self.phones else "No phones"
+        birthday = self.birthday.value if self.birthday else "Not available"
         return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}"
-    
     
 class AddressBook(UserDict):
     def add_record(self, record: Record): 
@@ -96,3 +96,5 @@ class AddressBook(UserDict):
         if not self.data: 
             return "AddressBook is empty" 
         return "\n".join(str(record) for record in self.data.values()) 
+    
+   
